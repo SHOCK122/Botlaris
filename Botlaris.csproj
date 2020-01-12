@@ -8,6 +8,9 @@
     <PackageTags>automation;</PackageTags>
     <Description>Botlaris is an automation application that moves files based on a template file (.xls or .xlsx). The first column is the name of the folders that the files named in the same row and subsequent columns are renamed to and potentially moved to.</Description>
     <Copyright>SHOCK122</Copyright>
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishTrimmed>true</PublishTrimmed>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>

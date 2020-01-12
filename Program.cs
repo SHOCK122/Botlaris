@@ -23,7 +23,7 @@ namespace Botlaris
             
             while (!done)
             {
-                Console.WriteLine("Please select a command:");
+                Console.WriteLine("\r\nPlease select a command:");
                 Console.WriteLine("  move: move files into folders based on selected template file.");
                 Console.WriteLine("  rename: rename without moving the files based on the selected template file.");
                 Console.WriteLine("  undo: undo previous Botlaris actions (requires valid moveLog.txt).");
@@ -56,6 +56,7 @@ namespace Botlaris
                 {
                     Console.WriteLine("Please select the file you want to use as the template!");
                     pathStr = Console.ReadLine();
+                    pathStr = pathStr.Split('"').Length > 1 ? pathStr.Split('"')[1] : pathStr;
                 }
             }
         }
@@ -142,10 +143,6 @@ namespace Botlaris
                             Directory.CreateDirectory(target);
                             Log($"Create folder: '{target}'", 1);
                         }
-                        //else
-                        //{
-                        //    Log($"Folder already exists: '{target}'");
-                        //}
                     }
                     //do selected action
                     else if (row > 2 && col >1)

@@ -3,6 +3,11 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <Authors>SHOCK122</Authors>
+    <PackageTags>automation;</PackageTags>
+    <Description>Botlaris is an automation application that moves files based on a template file (.xls or .xlsx). The first column is the name of the folders that the files named in the same row and subsequent columns are renamed to and potentially moved to.</Description>
+    <Copyright>SHOCK122</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

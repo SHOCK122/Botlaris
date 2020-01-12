@@ -24,11 +24,11 @@ namespace Botlaris
             while (!done)
             {
                 Console.WriteLine("\r\nPlease select a command:");
-                Console.WriteLine("  move: move files into folders based on selected template file.");
-                Console.WriteLine("  rename: rename without moving the files based on the selected template file.");
-                Console.WriteLine("  undo: undo previous Botlaris actions (requires valid moveLog.txt).");
-                Console.WriteLine("  new: select a new template file.");
-                Console.WriteLine("  exit: quit Botlaris.");
+                Console.WriteLine("  move or m: move files into folders based on selected template file.");
+                Console.WriteLine("  rename or r: rename without moving the files based on the selected template file.");
+                Console.WriteLine("  undo or u: undo previous Botlaris actions (requires valid moveLog.txt).");
+                Console.WriteLine("  new or n: select a new template file.");
+                Console.WriteLine("  exit or e: quit Botlaris.");
                 HandleInput(Console.ReadLine());
             }
         }
@@ -87,18 +87,23 @@ namespace Botlaris
             switch (userInput.ToLower())
             {
                 case "move":
+                case "m":
                     MoveFiles();
                     break;
                 case "undo":
+                case "u":
                     UndoMove();
                     break;
                 case "rename":
+                case "r":
                     MoveFiles(true);
                     break;
                 case "exit":
+                case "e":
                     Exit();
                     break;
                 case "new":
+                case "n":
                     SelectFile();
                     break;
                 default:

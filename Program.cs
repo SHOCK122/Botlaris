@@ -44,7 +44,7 @@ namespace Botlaris
                     source = Path.GetDirectoryName(pathStr);
                     FileInfo fi = new FileInfo(pathStr);
                     tFile = new ExcelPackage(fi);
-                    Directory.CreateDirectory(source + @"\BOTLARIS_LOGS");
+                    Directory.CreateDirectory(source + @"\~BOTLARIS_LOGS");
                     Log("File selected: " + Path.GetFullPath(pathStr));
                     validFile = true;
                 }
@@ -67,16 +67,16 @@ namespace Botlaris
             switch (logType)
             {
                 case 0:
-                    File.AppendAllText(source + @"\BOTLARIS_LOGS\errorLog.txt", message);
+                    File.AppendAllText(source + @"\~BOTLARIS_LOGS\errorLog.txt", message);
                     break;
                 case 1:
-                    File.AppendAllText(source + @"\BOTLARIS_LOGS\moveLog.txt", message);
+                    File.AppendAllText(source + @"\~BOTLARIS_LOGS\moveLog.txt", message);
                     break;
                 case 2:
-                    File.AppendAllText(source + @"\BOTLARIS_LOGS\undoLog.txt", message);
+                    File.AppendAllText(source + @"\~BOTLARIS_LOGS\undoLog.txt", message);
                     break;
                 default:
-                    File.AppendAllText(source + @"\BOTLARIS_LOGS\errorLog.txt", message);
+                    File.AppendAllText(source + @"\~BOTLARIS_LOGS\errorLog.txt", message);
                     break;
             }
             Console.WriteLine(logMessage);
@@ -173,6 +173,7 @@ namespace Botlaris
 
         private static string GetSuff(ExcelWorksheet ws, int col)
         {
+            //store suffix like folder names instead of looking up for each file.
             return ws.Cells[2, col].Value != null ? ws.Cells[2, col].Value.ToString() : "";
         }
 
@@ -221,9 +222,9 @@ namespace Botlaris
             Regex rFilePaths = new Regex(@"Move\sfile:\s\'(?<prev>.+)\'\s~to~\s\'(?<now>.+)\'", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             Regex rFolders = new Regex(@"Create\sfolder:\s\'(?<folder>.+)\'", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             Console.WriteLine("You chose to undo moving of files");
-            if (File.Exists(source + @"\BOTLARIS_LOGS\moveLog.txt"))
+            if (File.Exists(source + @"\~BOTLARIS_LOGS\moveLog.txt"))
             {
-                foreach (string line in File.ReadAllLines(source + @"\BOTLARIS_LOGS\moveLog.txt"))
+                foreach (string line in File.ReadAllLines(source + @"\~BOTLARIS_LOGS\moveLog.txt"))
                 {
                     Console.WriteLine($"Undoing {line}");
                     Match matchFiles = rFilePaths.Match(line);
@@ -256,7 +257,7 @@ namespace Botlaris
             }
             else
             {
-                Console.WriteLine(@"No valid moveLog.txt file found! Ensure the file is located at ..\BOTLARIS_LOGS\moveLog.txt");
+                Console.WriteLine(@"No valid moveLog.txt file found! Ensure the file is located at ..\~BOTLARIS_LOGS\moveLog.txt");
             }
         }
         static void Exit()
